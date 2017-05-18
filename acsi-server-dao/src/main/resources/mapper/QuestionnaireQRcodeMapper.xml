@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.safefire.acsiserver.dao.mapinterface.QuestionnaireQRcodeMapper" >
+    <resultMap id="BaseResultMap" type="com.safefire.acsiserver.entity.QuestionnaireQRcodeEntity" >
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <result column="PROJECT_CODE" property="projectCode" jdbcType="VARCHAR" />
+        <result column="PROJECT_NAME" property="projectName" jdbcType="VARCHAR" />
+        <result column="QRCODE" property="qrCode" jdbcType="VARCHAR" />
+        <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ID, PROJECT_CODE, PROJECT_NAME,QRCODE,USER_ID,USER_NAME,CREATE_TIME,UPDATE_TIME
+    </sql>
+
+    <select id="getCount"  resultType="Integer" >
+        SELECT COUNT(1) FROM t_questionnaire_qrcode
+    </select>
+
+    <select id="findOneById" parameterType="Integer" resultMap="BaseResultMap" >
+        SELECT <include refid="Base_Column_List" />
+        FROM t_questionnaire_qrcode
+        WHERE ID = #{id} limit 1
+    </select>
+
+    <select id="findOneByProjectCode" parameterType="String" resultMap="BaseResultMap" >
+        SELECT <include refid="Base_Column_List" />
+        FROM t_questionnaire_qrcode
+        WHERE PROJECT_CODE = #{projectCode} limit 1
+    </select>
+
+    <!-- useGeneratedKeys  keyProperty返回自动生成主键 -->
+    <insert id="insertOne" parameterType="com.safefire.acsiserver.entity.QuestionnaireQRcodeEntity" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO t_questionnaire_qrcode(PROJECT_CODE,PROJECT_NAME,QRCODE,USER_ID,USER_NAME)
+        values (#{projectCode}, #{projectName}, #{qrCode},#{userId},#{userName} );
+    </insert>
+
+</mapper>
