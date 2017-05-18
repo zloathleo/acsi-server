@@ -1,8 +1,10 @@
 package com.safefire.acsiserver.webapp.controller;
 
 import com.safefire.acsiserver.service.UserService;
-import com.safefire.acsiserver.webapp.vo.Questions;
-import com.safefire.acsiserver.webapp.vo.QuestionsChoice;
+import com.safefire.acsiserver.webapp.vo.ReqUserLogin;
+import com.safefire.acsiserver.webapp.vo.ResUserLogin;
+import com.safefire.acsiserver.webapp.vo.biz.Questions;
+import com.safefire.acsiserver.webapp.vo.biz.QuestionsChoice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * Created by huangguoxin on 16/5/31.
  */
-@RequestMapping("/SpringBoot")
+@RequestMapping("/user")
 @RestController
 public class WidgetController {
 
@@ -22,6 +26,16 @@ public class WidgetController {
 
     @Autowired
     UserService userService;
+
+    @RequestMapping(value = "/login",method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResUserLogin login(@Valid ReqUserLogin reqLogin){
+
+        int count = userService.getCount();
+        logger.info("reqLogin:" + reqLogin);
+
+        ResUserLogin res = new ResUserLogin();
+        return res;
+    }
 
     @RequestMapping(value = "/hello",method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE})
     public Questions helloSpringBoot(){
@@ -34,8 +48,6 @@ public class WidgetController {
         }
         int count = userService.getCount();
         logger.info("getCount:" + count);
-
-//        userService.getUser("Test User");
 
         return qs;
     }

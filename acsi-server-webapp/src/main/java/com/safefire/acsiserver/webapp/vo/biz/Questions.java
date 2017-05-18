@@ -1,4 +1,4 @@
-package com.safefire.acsiserver.webapp.vo;
+package com.safefire.acsiserver.webapp.vo.biz;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -31,8 +31,12 @@ public class QuestionnaireQRcodeServiceTest {
     } 
 
     @Test
-    public void testInsertOne() throws Exception { 
-        
+    public void testInsertOne() throws Exception {
+        QuestionnaireQRcodeEntity one = new QuestionnaireQRcodeEntity();
+        one.setProjectCode("testInsertCode-1");
+        one.setProjectName("testInsertName-1");
+        testInstance.insertOne(one);
+        logger.info("one:" + one);
     } 
 
 

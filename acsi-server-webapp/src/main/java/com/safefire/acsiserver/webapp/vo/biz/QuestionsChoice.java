@@ -1,4 +1,4 @@
-package com.safefire.acsiserver.webapp.vo;
+package com.safefire.acsiserver.webapp.vo.biz;
 
 /**
  * Created by Leo on 2017/5/16.
