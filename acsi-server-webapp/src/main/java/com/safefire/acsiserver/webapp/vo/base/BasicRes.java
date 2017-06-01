@@ -1,4 +1,4 @@
-package com.safefire.acsiserver.webapp.vo;
+package com.safefire.acsiserver.webapp.vo.base;
 
 import java.io.Serializable;
 

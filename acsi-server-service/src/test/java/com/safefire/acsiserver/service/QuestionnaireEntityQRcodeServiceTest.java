@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 */ 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class QuestionnaireQRcodeServiceTest { 
+public class QuestionnaireEntityQRcodeServiceTest {
 
     private Logger logger =  LoggerFactory.getLogger(this.getClass());
  
@@ -26,7 +26,7 @@ public class QuestionnaireQRcodeServiceTest {
 
     @Test
     public void testFindOneByProjectCode() throws Exception {
-        QuestionnaireQRcodeEntity entity = testInstance.findOneByProjectCode("pro_code_001");
+        QuestionnaireQRcodeEntity entity = testInstance.findOneByProjectCode("abcd");
         logger.info("logger:" + entity);
     } 
 

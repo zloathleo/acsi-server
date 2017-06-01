@@ -1,13 +1,22 @@
-package com.safefire.acsiserver.webapp.vo.biz;
+package com.safefire.acsiserver.webapp.vo;
 
 /**
  * Created by Leo on 2017/5/16.
  */
-public class QuestionsAnswer {
+public class QuestionsChoice {
 
     private Integer id;
     private String q;
-    private String v;
+    private Integer v;
+
+    public QuestionsChoice() {
+    }
+
+    public QuestionsChoice(Integer id, String q, Integer v) {
+        this.id = id;
+        this.q = q;
+        this.v = v;
+    }
 
     public Integer getId() {
         return id;
@@ -25,11 +34,11 @@ public class QuestionsAnswer {
         this.q = q;
     }
 
-    public String getV() {
+    public Integer getV() {
         return v;
     }
 
-    public void setV(String v) {
+    public void setV(Integer v) {
         this.v = v;
     }
 }

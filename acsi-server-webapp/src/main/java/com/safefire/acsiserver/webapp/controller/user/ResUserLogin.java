@@ -1,4 +1,6 @@
-package com.safefire.acsiserver.webapp.vo;
+package com.safefire.acsiserver.webapp.controller.user;
+
+import com.safefire.acsiserver.webapp.vo.base.BasicRes;
 
 /**
  * Created by Leo on 2017/5/18.

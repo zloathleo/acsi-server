@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.safefire.acsiserver.dao.mapinterface.QuestionnaireItemCategoryMapper">
+    <resultMap id="BaseResultMap" type="com.safefire.acsiserver.entity.QuestionnaireItemCategoryEntity">
+        <id column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="CONTENT" property="content" jdbcType="VARCHAR"/>
+
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,  CONTENT, CREATE_TIME,UPDATE_TIME
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_questionnaire_item_category
+    </select>
+
+</mapper>

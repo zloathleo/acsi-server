@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.safefire.acsiserver.dao.mapinterface.QuestionnaireMapper">
+    <resultMap id="BaseResultMap" type="com.safefire.acsiserver.entity.QuestionnaireEntity">
+        <id column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="QRCODE_ID" property="qrCodeId" jdbcType="INTEGER"/>
+        <result column="PROJECT_CODE" property="projectCode" jdbcType="VARCHAR"/>
+        <result column="PROJECT_NAME" property="projectName" jdbcType="VARCHAR"/>
+
+        <result column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+
+        <result column="CUSTOMER_MOBILE" property="customerMobile" jdbcType="VARCHAR"/>
+        <result column="CUSTOMER_NAME" property="customerName" jdbcType="VARCHAR"/>
+
+        <result column="STATE" property="state" jdbcType="VARCHAR"/>
+
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID, NAME,QRCODE_ID,PROJECT_CODE, PROJECT_NAME, USER_ID,USER_NAME,CUSTOMER_MOBILE,CUSTOMER_NAME,STATE,CREATE_TIME,UPDATE_TIME
+    </sql>
+
+    <select id="findOneByProjectCodeAndCustomerMobile" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_questionnaire
+        WHERE PROJECT_CODE = #{projectCode} AND CUSTOMER_MOBILE = #{customerMobile} limit 1
+    </select>
+
+    <!-- useGeneratedKeys  keyProperty返回自动生成主键 -->
+    <insert id="insertOne" parameterType="com.safefire.acsiserver.entity.QuestionnaireEntity" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO t_questionnaire(NAME,QRCODE_ID,PROJECT_CODE, PROJECT_NAME, USER_ID,USER_NAME,CUSTOMER_MOBILE,CUSTOMER_NAME,STATE)
+        values (#{name}, #{qrCodeId}, #{projectCode},#{projectName},#{userId} ,#{userName},#{customerMobile},#{customerName},#{state});
+    </insert>
+
+</mapper>

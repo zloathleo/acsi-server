@@ -1,10 +1,8 @@
-package com.safefire.acsiserver.webapp.controller;
+package com.safefire.acsiserver.webapp.controller.user;
 
 import com.safefire.acsiserver.service.UserService;
-import com.safefire.acsiserver.webapp.vo.ReqUserLogin;
-import com.safefire.acsiserver.webapp.vo.ResUserLogin;
-import com.safefire.acsiserver.webapp.vo.biz.Questions;
-import com.safefire.acsiserver.webapp.vo.biz.QuestionsChoice;
+import com.safefire.acsiserver.webapp.vo.Questions;
+import com.safefire.acsiserver.webapp.vo.QuestionsChoice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +39,10 @@ public class WidgetController {
     public Questions helloSpringBoot(){
         Questions qs = new Questions();
         for (int i=0;i<25;i++){
-            QuestionsChoice choice = new QuestionsChoice();
-            choice.setId(i);
-            choice.setQ("问题-" + i);
-            qs.getChoice().add(choice);
+//            QuestionsChoice choice = new QuestionsChoice();
+//            choice.setId(i);
+//            choice.setQ("问题-" + i);
+//            qs.getChoice().add(choice);
         }
         int count = userService.getCount();
         logger.info("getCount:" + count);

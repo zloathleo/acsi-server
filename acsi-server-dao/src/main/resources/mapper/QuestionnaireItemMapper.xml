@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.safefire.acsiserver.dao.mapinterface.QuestionnaireItemMapper">
+    <resultMap id="BaseResultMap" type="com.safefire.acsiserver.entity.QuestionnaireItemEntity">
+        <id column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="QUESTIONNAIRE_ID" property="questionnaireId" jdbcType="INTEGER"/>
+        <result column="CONTENT_ID" property="contentId" jdbcType="INTEGER"/>
+
+        <result column="SCORE" property="score" jdbcType="INTEGER"/>
+        <result column="SUGGEST" property="suggest" jdbcType="VARCHAR"/>
+
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID, QUESTIONNAIRE_ID,CONTENT_ID,SCORE,SUGGEST, CREATE_TIME,UPDATE_TIME
+    </sql>
+
+    <select id="queryQuestionnaireItemsByQuestionnaireId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_questionnaire_item
+        WHERE QUESTIONNAIRE_ID=#{questionnaireId}
+    </select>
+
+    <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into t_questionnaire_item
+        (QUESTIONNAIRE_ID, CONTENT_ID, SCORE, SUGGEST,CREATE_TIME,UPDATE_TIME)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.questionnaireId}, #{item.contentId},
+            #{item.score},
+            #{item.suggest},
+            #{item.createTime}, #{item.updateTime}
+            )
+        </foreach>
+    </insert>
+
+    <update id="updateBatch" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update t_questionnaire_item
+            　
+            <trim prefix="set" suffixOverrides=",">
+                <if test="item.score != null">SCORE=#{item.score},</if>
+                <if test="item.suggest != null">SUGGEST=#{item.suggest},</if>
+            </trim>
+            where id = ${item.id}
+        </foreach>
+    </update>
+
+
+</mapper>

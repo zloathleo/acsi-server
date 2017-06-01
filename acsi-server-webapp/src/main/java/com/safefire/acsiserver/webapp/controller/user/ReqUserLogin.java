@@ -1,4 +1,4 @@
-package com.safefire.acsiserver.webapp.vo;
+package com.safefire.acsiserver.webapp.controller.user;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
