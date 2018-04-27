@@ -11,9 +11,11 @@ public class ReqQuestQtImageCreate implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Size(min = 4, max = 20, message = "{ReqLogin.loginName.Size}")
-    @NotNull(message = "{ReqLogin.loginName.NotNull}")
+    @Size(min = 4, max = 32, message = "参数长度超限")
+    @NotNull(message = "参数不能为空")
     private String projectCode;
+
+    private String projectName;
 
     private String userId;
 
@@ -23,6 +25,14 @@ public class ReqQuestQtImageCreate implements Serializable {
 
     public void setProjectCode(String projectCode) {
         this.projectCode = projectCode;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
     public String getUserId() {

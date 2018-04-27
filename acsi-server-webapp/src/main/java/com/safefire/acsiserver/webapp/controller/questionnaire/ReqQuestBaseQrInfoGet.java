@@ -11,8 +11,8 @@ public class ReqQuestBaseQrInfoGet implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Size(min = 4, max = 20, message = "{ReqLogin.loginName.Size}")
-    @NotNull(message = "{ReqLogin.loginName.NotNull}")
+    @Size(min = 4, max = 20, message = "参数长度超限")
+    @NotNull(message = "参数不能为空")
     private String qrCode;
 
     public String getQrCode() {

@@ -23,7 +23,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.safefire.acsiserver" level="DEBUG">
+	<logger name="com" level="DEBUG">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="LOGFILE" />
 	</logger>

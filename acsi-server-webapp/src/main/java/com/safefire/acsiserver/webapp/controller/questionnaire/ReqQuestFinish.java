@@ -1,5 +1,6 @@
 package com.safefire.acsiserver.webapp.controller.questionnaire;
 
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
@@ -9,8 +10,10 @@ public class ReqQuestFinish implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Size(min = 4, max = 32, message = "参数长度超限")
     private String projectCode;
 
+    @Size(min = 4, max = 32, message = "参数长度超限")
     private String customerMobile;
 
     private String customerName;

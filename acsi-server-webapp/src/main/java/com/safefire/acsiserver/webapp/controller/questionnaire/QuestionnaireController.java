@@ -14,8 +14,10 @@ import com.safefire.acsiserver.webapp.vo.base.BasicRes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,6 +37,8 @@ import java.util.stream.Collectors;
 @RestController
 public class QuestionnaireController {
 
+    private String serverSite = "http://116.62.150.38" ;
+
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -53,7 +57,7 @@ public class QuestionnaireController {
     QuestionnaireItemService questionnaireItemService;
 
     /**
-     * 生成二维码
+     * 1.生成二维码
      *
      * @param params
      * @return
@@ -62,7 +66,7 @@ public class QuestionnaireController {
     public @ResponseBody
     byte[] createQuestQtImage(@Valid ReqQuestQtImageCreate params) {
         String projectCode = params.getProjectCode();
-
+        logger.warn("生成二维码", projectCode);
         QuestionnaireQRcodeEntity qr = qrService.findOneByProjectCode(projectCode);
         String qrCode = null;
         if (qr == null) {
@@ -73,14 +77,17 @@ public class QuestionnaireController {
             //todo 关联查找projectName
             qr.setProjectName(projectCode);
             qr.setQrCode(qrCode);
+            String projectName = StringUtils.isEmpty(params.getProjectName()) ? projectCode : params.getProjectName();
+            qr.setProjectName(projectName);
             qr.setUserId(params.getUserId());
             qrService.insertOne(qr);
         } else {
             qrCode = qr.getQrCode();
         }
 
+
         //生成二维码
-        String url = "http://localhost:9090" + "/quest/" + qrCode;
+        String url = serverSite + "/?qrCode=" + qrCode;
         try {
             return QRUtils.createQRCodeImage(url);
         } catch (Exception e) {
@@ -90,7 +97,7 @@ public class QuestionnaireController {
     }
 
     /**
-     * 扫码访问获得问卷项目基础信息
+     * 2.提供给用户扫码访问获得问卷项目基础信息
      *
      * @param params
      * @return
@@ -108,6 +115,7 @@ public class QuestionnaireController {
 
     /**
      * 开始问卷生成问卷信息
+     * 用户
      *
      * @param params
      * @return
